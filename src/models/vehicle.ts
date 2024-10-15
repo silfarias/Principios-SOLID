@@ -3,7 +3,8 @@ export interface IVehicle {
     marca: string;
     modelo: string;
     anio: number;
-    precio: number
+    precio: number;
+    disponible?: boolean;
 }
 
 export class Vehicle implements IVehicle {
@@ -12,6 +13,7 @@ export class Vehicle implements IVehicle {
         public marca: string,
         public modelo: string,
         public anio: number,
-        public precio: number
+        public precio: number,
+        public disponible?: boolean
     ) {}
 };
