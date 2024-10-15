@@ -6,14 +6,3 @@ export interface IVehicle {
     precio: number;
     disponible?: boolean;
 }
-
-export class Vehicle implements IVehicle {
-    constructor(
-        public id: number,
-        public marca: string,
-        public modelo: string,
-        public anio: number,
-        public precio: number,
-        public disponible?: boolean
-    ) {}
-};

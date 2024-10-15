@@ -6,6 +6,7 @@ export class MongoClientRepository implements IClientRepository {
 
     public async create(client: IClient): Promise<IClient> {
         this.clients.push(client);
+        console.log(this.clients);
         return client;
     }
 

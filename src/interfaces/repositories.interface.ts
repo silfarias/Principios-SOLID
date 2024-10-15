@@ -2,10 +2,10 @@ import { IClient } from "../models/client"
 import { IVehicle } from "../models/vehicle"
 
 export interface IVehicleRepository {
-    create(vehicle: IVehicle): Promise<IVehicle>;
-    findById(id: number): Promise<IVehicle | null>;
-    update(id: number, vehicle: Partial<IVehicle>): Promise<IVehicle | null>;
-    delete(id: number): Promise<boolean>;
+    create: (vehicle: IVehicle) => Promise<IVehicle>;
+    findById: (id: number) => Promise<IVehicle | null>;
+    update: (id: number, vehicle: Partial<IVehicle>) => Promise<IVehicle | null>;
+    delete: (id: number) => Promise<boolean>;
 };
 
 export interface IClientRepository {

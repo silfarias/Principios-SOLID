@@ -4,12 +4,3 @@ export interface IClient {
     email: string;
     telefono: number;
 };
-
-export class Client implements IClient {
-    constructor(
-        public id: number,
-        public nombre: string,
-        public email: string,
-        public telefono: number
-    ) {}
-};

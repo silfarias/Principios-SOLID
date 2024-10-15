@@ -1,27 +1,35 @@
 import { IVehicleRepository } from "../interfaces/repositories.interface";
+import { IVehicleService } from "../interfaces/service.interface";
 import { IVehicle } from "../models/vehicle";
 
-export class VehicleService {
+export class VehicleService implements IVehicleService {
     private vehicleRepository: IVehicleRepository;
 
     constructor(vehicleRepository: IVehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
 
-    private generateId(): number {
-        return Math.floor(Math.random() * 100000);
+    public async createVehicle(data: IVehicle): Promise<IVehicle> {
+        if (!data) {
+            throw new Error('No se proporcionaron datos del vehículo');
+        }
+        const vehicle: IVehicle = {
+            id: data.id,
+            marca: data.marca,
+            modelo: data.modelo,
+            anio: data.anio,
+            precio: data.precio,
+            disponible: data.disponible
+        };
+        const creacionVehiculo = await this.vehicleRepository.create(vehicle);
+        return creacionVehiculo;
     }
-    //logica para crear un vehiculo
-    public async createVehicle(data: Omit<IVehicle, 'id'>): Promise<IVehicle> {
-        const newId = this.generateId();
-        const vehicle: IVehicle = { id: newId, ...data, disponible: true };
-        return await this.vehicleRepository.create(vehicle);
-    }
-    //busqueda de vehiculo
+
+
     public async findVehicleById(id: number): Promise<IVehicle | null> {
         return await this.vehicleRepository.findById(id);
     }
-    //actualización de vehiculo
+
     public async updateVehicle(id: number, vehicle: Partial<IVehicle>): Promise<IVehicle | null> {
         return await this.vehicleRepository.update(id, vehicle);
     }

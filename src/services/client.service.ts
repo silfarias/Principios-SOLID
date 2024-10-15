@@ -1,7 +1,8 @@
 import { IClientRepository } from "../interfaces/repositories.interface";
+import { IClientService } from "../interfaces/service.interface";
 import { IClient } from "../models/client";
 
-export class ClientService {
+export class ClientService implements IClientService {
     private clientRepository: IClientRepository;
 
     constructor(clientRepository: IClientRepository) {

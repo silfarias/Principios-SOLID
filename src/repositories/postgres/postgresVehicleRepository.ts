@@ -2,12 +2,23 @@ import { IVehicleRepository } from "../../interfaces/repositories.interface";
 import { IVehicle } from "../../models/vehicle";
 
 export class PostgresVehicleRepository implements IVehicleRepository {
+    private static instance: PostgresVehicleRepository;
     private vehicles: IVehicle[] = [];
 
-    public async create(vehicle: IVehicle): Promise<IVehicle> {
-        this.vehicles.push(vehicle);
-        return vehicle;
+    private constructor() {}
+
+    public static getInstance(): PostgresVehicleRepository {
+        if (!PostgresVehicleRepository.instance) {
+            PostgresVehicleRepository.instance = new PostgresVehicleRepository();
+        }
+        return PostgresVehicleRepository.instance;
     }
+
+    public async create(vehicle: IVehicle): Promise<IVehicle> {
+        this.vehicles.push(vehicle); 
+        console.log(this.vehicles);
+        return vehicle;
+    }    
 
     public async findById(id: number): Promise<IVehicle | null> {
         const vehicle = this.vehicles.find(v => v.id === id);
