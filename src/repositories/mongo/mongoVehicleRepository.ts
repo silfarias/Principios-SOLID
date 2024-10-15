@@ -4,35 +4,31 @@ import { IVehicle } from "../../models/vehicle";
 export class MongoVehicleRepository implements IVehicleRepository {
     private vehicles: IVehicle[] = [];
 
-    async create(vehicle: IVehicle): Promise<IVehicle> {
+    public async create(vehicle: IVehicle): Promise<IVehicle> {
         this.vehicles.push(vehicle);
         return vehicle;
     }
 
-    async findById(id: number): Promise<IVehicle> {
+    public async findById(id: number): Promise<IVehicle | null> {
+        const vehicle = this.vehicles.find(v => v.id === id);
+        return vehicle || null;
     }
 
-    async update(id: number, updatedVehicle: IVehicle): Promise<IVehicle> {
+    public async update(id: number, vehicle: Partial<IVehicle>): Promise<IVehicle | null> {
+        const index = this.vehicles.findIndex(v => v.id === id);
+        if (index !== -1) {
+            this.vehicles[index] = { ...this.vehicles[index], ...vehicle };
+            return this.vehicles[index];
+        }
+        return null;
     }
 
-    async delete(id: number): Promise<IVehicle> {
-
+    public async delete(id: number): Promise<boolean> {
+        const index = this.vehicles.findIndex(v => v.id === id);
+        if (index !== -1) {
+            this.vehicles.splice(index, 1);
+            return true;
+        }
+        return false;
     }
-}
-
-export class MySqlVehicleRepository implements IVehicleRepository {
-    private vehicles: IVehicle[] = [];
-
-    async create(vehicle: IVehicle): Promise<IVehicle> {
-    }
-
-    async findById(id: number): Promise<IVehicle> {
-    }
-
-    async update(id: number, updatedVehicle: IVehicle): Promise<IVehicle> {
-    }
-
-    async delete(id: number): Promise<IVehicle> {
-
-    }
-}
+};

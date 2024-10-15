@@ -1,4 +1,3 @@
-
 export interface IVehicle {
     id: number;
     marca: string;
@@ -6,3 +5,13 @@ export interface IVehicle {
     anio: number;
     precio: number
 }
+
+export class Vehicle implements IVehicle {
+    constructor(
+        public id: number,
+        public marca: string,
+        public modelo: string,
+        public anio: number,
+        public precio: number
+    ) {}
+};
