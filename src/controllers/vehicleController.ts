@@ -34,7 +34,7 @@ export class VehicleController {
         }
     }
 
-    public async actualizarVehiculo(req: Request, res: Response) {
+    public async actualizarVehiculo(req: Request, res: Response): Promise<any> {
         try {
             const { id } = req.params;
             const data = req.body as Partial<IVehicle>;
@@ -44,11 +44,12 @@ export class VehicleController {
             }
             res.status(200).json(vehiculo);
         } catch (error) {
+            console.log(error);
             res.status(400).json({ message: 'Error al actualizar vehículo', error });
         }
     }
 
-    public async eliminarVehiculo(req: Request, res: Response) {
+    public async eliminarVehiculo(req: Request, res: Response): Promise<any> {
         try {
             const { id } = req.params;
             const deleted = await this.vehicleService.deleteVehicle(Number(id));

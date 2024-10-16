@@ -9,10 +9,18 @@ export class ClientService implements IClientService {
         this.clientRepository = clientRepository;
     }
 
-    public async createClient(data: Omit<IClient, 'id'>): Promise<IClient> {
-        const newId = this.generateId();
-        const client: IClient = { id: newId, ...data };
-        return await this.clientRepository.create(client);
+    public async createClient(data: IClient): Promise<IClient> {
+        if (!data) {
+            throw new Error('No se proporcionaron datos del cliente');
+        }
+        const client: IClient = {
+            id: data.id,
+            nombre: data.nombre,
+            email: data.email,
+            telefono: data.telefono,
+        }
+        const crearClient = await this.clientRepository.create(client);
+        return crearClient;
     }
 
     public async getClientById(id: number): Promise<IClient | null> {
@@ -25,9 +33,5 @@ export class ClientService implements IClientService {
 
     public async deleteClient(id: number): Promise<boolean> {
         return await this.clientRepository.delete(id);
-    }
-
-    private generateId(): number {
-        return Math.floor(Math.random() * 100000);
     }
 };

@@ -17,11 +17,11 @@ export class serverConfig implements IServerConfig {
         this.routes();
     };
 
-    middlewares(): void {
+    private middlewares(): void {
         this.app.use(cors());
         this.app.use(morgan('dev'));
         this.app.use(express.json());
-        this.app.use(bodyParser.json())
+        // this.app.use(bodyParser.json())
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 

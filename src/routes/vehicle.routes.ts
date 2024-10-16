@@ -11,5 +11,7 @@ const vehicleController = new VehicleController(vehicleService);
 
 vehicleRouter.post('/', (req, res) => vehicleController.crearVehiculo(req, res));
 vehicleRouter.get('/:id', (req, res) => vehicleController.obtenerVehiculo(req, res));
+vehicleRouter.put('/:id',  vehicleController.actualizarVehiculo);
+vehicleRouter.delete('/:id', vehicleController.eliminarVehiculo);
 
 export { vehicleRouter };
