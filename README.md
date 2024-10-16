@@ -30,6 +30,6 @@ npm start
 
 O en modo desarrollo:
 
-````bash
+```bash
 npm run dev
 ```
